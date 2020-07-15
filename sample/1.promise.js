@@ -13,10 +13,12 @@
 
 let Promise = require('../src/promise'); // 引入自己的promise
 let promise = new Promise((resolve, reject) => {
-  // resolve 代表的是成功的回调  reject 表示的是失败的回调
+  setTimeout(() => {
+    resolve('ok');
+  }, 1000);
+
   // setTimeout(() => {
-  // resolve('ok');
-  reject('reason');
+  //   reject('error');
   // }, 1000);
 });
 promise.then(
@@ -27,3 +29,16 @@ promise.then(
     console.log('fail', reason);
   }
 );
+
+promise.then(
+  (val) => {
+    console.log('success2', val);
+  },
+  (reason) => {
+    console.log('fail2', reason);
+  }
+);
+
+// 1 同一个promise可以then多次 （发布订阅模式）
+// 调用then时，当前状态如果是等待态，需要将成功和失败的回调分别进行存放 （订阅）
+// 调用resolve时 将订阅的函数依次执行 （发布）
