@@ -1,0 +1,12 @@
+{
+  "name": "Promise",
+  "version": "1.0.0",
+  "author": "fernandoxu <fernandoxu9@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "promises-aplus-tests src/promise"
+  },
+  "dependencies": {
+    "promises-aplus-tests": "^2.1.2"
+  }
+}
