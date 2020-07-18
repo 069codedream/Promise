@@ -50,8 +50,8 @@ const resolvePromise = (x, promise2, resolve, reject) => {
         reject(r);
       }
     );
-  } catch (err) {
-    // 取then报错就直接reject err
+  } catch (e) {
+    // 取then报错就直接reject e
     /** 存在下面的可能：
       let obj = {}
       Object.defineProperty(obj,'then',{
@@ -65,7 +65,7 @@ const resolvePromise = (x, promise2, resolve, reject) => {
     if (called) return;
     called = true;
 
-    reject(err);
+    reject(e);
   }
 };
 
@@ -172,6 +172,8 @@ class Promise {
     return promise2;
   }
 }
+
+// 延迟对象
 
 Promise.defer = Promise.deferred = function () {
   const dfd = {};
