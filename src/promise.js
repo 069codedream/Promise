@@ -171,6 +171,11 @@ class Promise {
 
     return promise2;
   }
+
+  catch(onRejected) {
+    // catch相当于不传onFulfilled
+    return this.then(null, onRejected);
+  }
 }
 
 // 延迟对象
