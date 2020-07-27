@@ -79,6 +79,8 @@ class Promise {
     this.onRejectedCallbacks = [];
 
     const resolve = (value) => {
+      if (value instanceof Promise) return value.then(resolve, reject);
+
       if (this.status === PENDING) {
         this.status = FULFILLED;
         this.value = value;
@@ -175,6 +177,21 @@ class Promise {
   catch(onRejected) {
     // catch相当于不传onFulfilled
     return this.then(null, onRejected);
+  }
+
+  // 默认返回成功的promise
+  // 如果参数是promise，会等待promise解析完毕，向下执行
+  static resolve(value) {
+    return new Promise((resolve, reject) => {
+      resolve(value);
+    });
+  }
+
+  // 直接将值变成错误结果
+  static reject(reason) {
+    return new Promise((resolve, reject) => {
+      reject(reason);
+    });
   }
 }
 
